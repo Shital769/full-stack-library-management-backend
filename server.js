@@ -19,7 +19,7 @@ app.use(cors());
 //all uncaught requests
 app.use("*", (req, res) => {
   res.json({
-    message: "System status is OK.ƒ",
+    message: "System status is OK.",
   });
 });
 
