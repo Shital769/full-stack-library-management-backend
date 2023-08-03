@@ -1,7 +1,7 @@
 import express from "express";
 import { comparePassword, hashPassword } from "../helpers/BcryptHelper.js";
 const router = express.Router();
-import { createUser, getUserByEmail } from "../models/user/userModel.js";
+import { createUser, getUserByEmail } from "../models/User/userModel.js";
 import { ERROR, SUCCESS } from "../Constant.js";
 
 router.get("/", (req, res, next) => {
