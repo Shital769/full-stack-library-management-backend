@@ -15,6 +15,7 @@ app.use(express.json());
 app.use(cors());
 
 //api routers
+import us
 
 //all uncaught requests
 app.use("*", (req, res) => {

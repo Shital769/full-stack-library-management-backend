@@ -1,7 +1,12 @@
 import express from "express";
 import { comparePassword, hashPassword } from "../helpers/BcryptHelper.js";
 const router = express.Router();
-import { createUser, getUserByEmail } from "../models/User/userModel.js";
+import {
+  createUser,
+  getUserByEmail,
+  getUserById,
+  updateUserById,
+} from "../models/User/userModel.js";
 import { ERROR, SUCCESS } from "../Constant.js";
 
 router.get("/", (req, res, next) => {
@@ -85,3 +90,42 @@ router.post("/login", async (req, res, next) => {
     next(error);
   }
 });
+
+//update password
+router.patch("/password-update", async (req, res, next) => {
+  try {
+    const user = await getUserById(req.headers.authorization);
+    const { currentPassword } = req.body;
+
+    const passMatched = comparePassword(currentPassword, user?.password);
+    if (passMatched) {
+      const hashedPass = hashPassword(req.body.password);
+
+      if (hashPassword) {
+        const update = await updateUserById(
+          { _id: user._id },
+          { password: hashedPass }
+        );
+
+        return update?.password
+          ? res.json({
+              status: "success",
+              message: "Password updated successfully!",
+            })
+          : res.json({
+              status: "error",
+              message: "Unable to update password!",
+            });
+      }
+    }
+
+    return res.json({
+      status: "error",
+      message: "Please enter the correct current password!",
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+export default router;
