@@ -1,4 +1,4 @@
-import userSchema from "./userSchema";
+import userSchema from "./userSchema.js";
 
 // User CRUD
 

@@ -1,14 +1,14 @@
 import express from "express";
 import { comparePassword, hashPassword } from "../helpers/BcryptHelper.js";
+import { ERROR, SUCCESS } from "../Constant.js";
 const router = express.Router();
+
 import {
   createUser,
   getUserByEmail,
   getUserById,
   updateUserById,
 } from "../models/User/userModel.js";
-import { ERROR, SUCCESS } from "../Constant.js";
-
 router.get("/", (req, res, next) => {
   try {
     res.json({

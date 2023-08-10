@@ -15,7 +15,13 @@ app.use(express.json());
 app.use(cors());
 
 //api routers
-import us
+import userRouter from "./src/routers/userRouter.js";
+import { isAuth } from "./src/middleware/authMiddleware.js";
+import bookRouter from "./src/routers/bookRouter.js";
+
+app.use("/api/v1/user", userRouter);
+// app.use("/api/v1/book", isAuth, bookRouter);
+app.use("/api/v1/transaction", isAuth, transactionRouter);
 
 //all uncaught requests
 app.use("*", (req, res) => {

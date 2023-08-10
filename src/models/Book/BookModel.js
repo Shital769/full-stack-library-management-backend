@@ -1,4 +1,4 @@
-import BookSchema from "./BookSchema";
+import BookSchema from "./BookSchema.js";
 
 export const getBookByIsbn = (isbn) => {
   return BookSchema.findOne({ isbn });
