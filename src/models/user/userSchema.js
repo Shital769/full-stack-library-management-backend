@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
     confirmPassword: {
-      type: string,
+      type: String,
       required: true,
     },
     role: {

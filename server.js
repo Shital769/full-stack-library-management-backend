@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
 import cors from "cors";
+import { ERROR } from "./src/Constant.js";
 
 const app = express();
 const PORT = process.env.NODE_ENV || 8000;
@@ -16,11 +17,12 @@ app.use(cors());
 
 //api routers
 import userRouter from "./src/routers/userRouter.js";
-import { isAuth } from "./src/middleware/authMiddleware.js";
 import bookRouter from "./src/routers/bookRouter.js";
+import { isAuth } from "./src/middleware/authMiddleware.js";
+import transactionRouter from "./src/routers/transactionRouter.js";
 
 app.use("/api/v1/user", userRouter);
-// app.use("/api/v1/book", isAuth, bookRouter);
+app.use("/api/v1/book", isAuth, bookRouter);
 app.use("/api/v1/transaction", isAuth, transactionRouter);
 
 //all uncaught requests
@@ -36,7 +38,7 @@ app.use((error, req, res, next) => {
 
   const errorCode = error.errorCode || 500;
   res.status(errorCode).json({
-    status: error,
+    status: ERROR,
     message: error.message,
   });
 });

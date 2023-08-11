@@ -1,6 +1,6 @@
 import express from "express";
 
-import { getAllTransactions } from "../../../frontend/src/helpers/AxiosHelpers";
+import getAllTransactions from "../../../frontend/src/helpers/AxiosHelpers.js";
 
 const router = express.Router();
 
